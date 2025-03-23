@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.chat-container {
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.message {
+  margin: 10px 0;
+}
+
+.ai-message {
+  background: #f0f0f0;
+}
+
+.user-message {
+  background: #d1f7c4;
+}
+
+.feedback-icons {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.feedback-section {
+  margin-top: 20px;
+}
+
+.stars span {
+  cursor: pointer;
+  font-size: 24px;
+}
