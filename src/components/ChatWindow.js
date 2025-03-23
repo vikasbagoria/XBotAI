@@ -1,27 +1,46 @@
-import React, { useState } from "react";
-import data from "../data.json"; // Import the JSON file
+import React, { useState, useEffect } from "react";
+import data from "../data.json";
+import { Link } from "react-router-dom";
 
 const ChatWindow = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const handleSendMessage = () => {
+  useEffect(() => {
+    const savedMessages = JSON.parse(localStorage.getItem("chatHistory")) || [];
+    setMessages(savedMessages);
+  }, []);
+
+  const handleSendMessage = (e) => {
+    e.preventDefault(); // Prevents default form submission behavior
+
     if (!input.trim()) return;
 
-    // Find matching response from JSON
     const foundAnswer = data.find((item) => item.question.toLowerCase() === input.toLowerCase());
-
-    // Use default message if no answer is found
     const aiResponse = foundAnswer ? foundAnswer.answer : "Sorry, Did not understand your query!";
 
-    // Update chat messages
-    setMessages([...messages, { text: input, sender: "user" }, { text: aiResponse, sender: "ai" }]);
-    
-    setInput(""); // Clear input field
+    const newMessages = [...messages, { text: input, sender: "user" }, { text: aiResponse, sender: "ai" }];
+    setMessages(newMessages);
+    localStorage.setItem("chatHistory", JSON.stringify(newMessages));
+    setInput("");
+  };
+
+  const handleNewChat = () => {
+    setMessages([]);
+    localStorage.removeItem("chatHistory");
   };
 
   return (
     <div>
+      <header>
+        <h1>Bot AI</h1> 
+      </header>
+
+      <nav>
+        <Link to="/" onClick={handleNewChat}>New Chat</Link>
+        <Link to="/history">Past Conversations</Link>
+      </nav>
+
       <div className="chat-container">
         {messages.map((msg, index) => (
           <p key={index} className={msg.sender === "ai" ? "ai-response" : "user-message"}>
@@ -30,13 +49,16 @@ const ChatWindow = () => {
         ))}
       </div>
 
-      <input
-        type="text"
-        placeholder="Message Bot AI..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button type="submit" onClick={handleSendMessage}>Ask</button>
+      {/* ✅ Wrap input and button inside a form */}
+      <form onSubmit={handleSendMessage}>
+        <input
+          type="text"
+          placeholder="Message Bot AI..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit">Ask</button> {/* ✅ Ensures form submission works */}
+      </form>
     </div>
   );
 };
