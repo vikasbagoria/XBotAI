@@ -29,6 +29,10 @@ const ChatWindow = () => {
     setMessages([]);
     localStorage.removeItem("chatHistory");
   };
+  const handleSaveChat = () => {
+    localStorage.setItem("chatHistory", JSON.stringify(messages));
+    alert("Conversation saved! ✅");
+  };
 
   return (
     <div>
@@ -59,6 +63,7 @@ const ChatWindow = () => {
         />
         <button type="submit">Ask</button> {/* ✅ Ensures form submission works */}
       </form>
+      <button type="button" onClick={handleSaveChat}>Save Conversation</button>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const HistoryPage = () => {
           <h3>Conversation {conv.id}</h3>
           {conv.conversation.map((msg, i) => (
             <p key={i}>
-              <strong>{msg.sender}:</strong> {msg.text}
+              <strong>{msg.sender}:</strong> <div>{msg.text}</div>
             </p>
           ))}
           <p><strong>Rating:</strong> {conv.feedback.rating}/5</p>
