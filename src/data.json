@@ -1,0 +1,15 @@
+[
+    {
+      "question": "Can you explain RESTful APIs?",
+      "answer": "RESTful APIs are designed around the REST (Representational State Transfer) architecture, which uses HTTP requests to access and manipulate data. They follow a stateless, client-server, cacheable communications protocol."
+    },
+    {
+      "question": "What is React?",
+      "answer": "React is a JavaScript library for building user interfaces, developed by Facebook. It is component-based and allows developers to build reusable UI components."
+    },
+    {
+      "question": "What is Node.js?",
+      "answer": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows you to run JavaScript code outside of a browser and is commonly used for backend development."
+    }
+  ]
+  

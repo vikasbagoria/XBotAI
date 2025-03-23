@@ -1,45 +1,42 @@
 import React, { useState } from "react";
-import Message from "./Message";
-import sampleData from "../data";
+import data from "../data.json"; // Import the JSON file
 
 const ChatWindow = () => {
-  const [messages, setMessages] = useState(sampleData[0].conversation);
   const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
+  const handleSendMessage = () => {
     if (!input.trim()) return;
 
-    const userMessage = { text: input, sender: "user" };
-    const aiMessage = {
-      text: "Sorry, Did not understand your query!",
-      sender: "ai",
-    };
+    // Find matching response from JSON
+    const foundAnswer = data.find((item) => item.question.toLowerCase() === input.toLowerCase());
 
-    setMessages([...messages, userMessage, aiMessage]);
-    setInput("");
+    // Use default message if no answer is found
+    const aiResponse = foundAnswer ? foundAnswer.answer : "Sorry, Did not understand your query!";
+
+    // Update chat messages
+    setMessages([...messages, { text: input, sender: "user" }, { text: aiResponse, sender: "ai" }]);
+    
+    setInput(""); // Clear input field
   };
 
   return (
-    <div className="chat-container">
-      <h1>Chat with AI</h1>
-      <div className="chat-box">
+    <div>
+      <div className="chat-container">
         {messages.map((msg, index) => (
-          <Message key={index} message={msg} />
+          <p key={index} className={msg.sender === "ai" ? "ai-response" : "user-message"}>
+            {msg.sender === "ai" && <span>Soul AI</span>} {msg.text}
+          </p>
         ))}
       </div>
 
-      <form onSubmit={handleSendMessage} className="chat-input">
-        <input
-          type="text"
-          placeholder='Message Bot AI...'
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Ask</button>
-      </form>
-
-      <button type="button" className="save-button">Save Chat</button>
+      <input
+        type="text"
+        placeholder="Message Bot AI..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button type="submit" onClick={handleSendMessage}>Ask</button>
     </div>
   );
 };
