@@ -8,7 +8,7 @@ const Message = ({ message }) => {
   return (
     <div className={`message ${isAI ? "ai-message" : "user-message"}`}>
       <p>
-        {isAI && <span>Soul AI:</span>} {message.text}
+        {isAI && <span>Soul AI</span>} {message.text}
       </p>
 
       {isAI && (

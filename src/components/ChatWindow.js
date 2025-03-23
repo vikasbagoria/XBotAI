@@ -32,7 +32,7 @@ const ChatWindow = () => {
       <form onSubmit={handleSendMessage} className="chat-input">
         <input
           type="text"
-          placeholder="Message Bot AI…"
+          placeholder='Message Bot AI...'
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
