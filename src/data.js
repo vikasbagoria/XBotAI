@@ -3,7 +3,7 @@ const sampleData = [
       id: 1,
       conversation: [
         { sender: "user", text: "Hello, AI!" },
-        { sender: "ai", text: "Hello! How can I assist you?" }
+        { sender: "ai", text: "Hi, how are you?" }
       ],
       feedback: {
         thumbsUp: true,

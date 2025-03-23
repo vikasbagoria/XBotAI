@@ -9,7 +9,7 @@ function App() {
       <div className="app-container">
         <nav>
           <Link to="/">Chat with AI</Link>
-          <Link to="/history">Past Conversations</Link>
+          {/* <Link to="/history">Past Conversations</Link> */}
         </nav>
 
         <Routes>

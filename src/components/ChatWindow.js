@@ -37,7 +37,7 @@ const ChatWindow = () => {
       </header>
 
       <nav>
-        <Link to="/" onClick={handleNewChat}>New Chat</Link>
+      <a href="/" onClick={handleNewChat}>New Chat</a>
         <Link to="/history">Past Conversations</Link>
       </nav>
 
